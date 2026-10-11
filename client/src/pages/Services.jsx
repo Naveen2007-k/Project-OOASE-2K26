@@ -101,7 +101,7 @@ const Services = () => {
         
         {/* Header Banner */}
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 bg-pink-100 text-pink-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-3 shadow-xs">
+          <div className="inline-flex items-center gap-2 bg-pink-100 text-pink-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-3 shadow-sm">
             <Sparkles size={16} /> Luxe Salon & Spa Experience
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight mb-4">

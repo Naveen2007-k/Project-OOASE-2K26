@@ -12,7 +12,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white/75 backdrop-blur-xl border-b border-pink-100/80 shadow-xs sticky top-0 z-50 transition-all">
+    <nav className="bg-white/75 backdrop-blur-xl border-b border-pink-100/80 shadow-sm sticky top-0 z-50 transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-18 py-2.5">
           <div className="flex items-center">
