@@ -115,17 +115,19 @@ const Booking = () => {
   }
 
   return (
-    <div className="bg-gray-50 min-h-[calc(100vh-64px)] py-10">
+    <div className="min-h-[calc(100vh-64px)] py-10 relative">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Book Appointment</h1>
+        <h1 className="text-3xl sm:text-4xl font-black text-gray-900 mb-8 font-display">
+          Schedule Your <span className="text-pink-600">Appointment</span>
+        </h1>
         
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="card bg-white/90 backdrop-blur-md rounded-3xl border border-white/80 shadow-xl shadow-pink-100/40 overflow-hidden p-0">
           {/* Service Summary Header */}
-          <div className="bg-primary-50 p-6 border-b border-gray-100">
-            <h2 className="text-xl font-bold text-gray-900">{service?.name}</h2>
+          <div className="bg-gradient-to-r from-pink-500/10 via-rose-500/10 to-amber-500/10 p-6 border-b border-pink-100">
+            <h2 className="text-2xl font-bold text-gray-900 font-display">{service?.name}</h2>
             <div className="flex gap-4 mt-2 text-gray-600 text-sm">
-              <span className="flex items-center"><Clock size={16} className="mr-1"/> {service?.durationMinutes} mins</span>
-              <span className="font-semibold text-gray-900">${service?.price}</span>
+              <span className="flex items-center text-gray-700 font-medium"><Clock size={16} className="mr-1 text-pink-500"/> {service?.durationMinutes} mins</span>
+              <span className="font-extrabold text-pink-600 text-base">${service?.price}</span>
             </div>
           </div>
 

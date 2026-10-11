@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AdminPanel from '../components/AdminPanel';
+import { Sparkles, Calendar, CheckCircle2, Clock, Crown, ArrowRight, Scissors } from 'lucide-react';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -75,33 +76,106 @@ const Dashboard = () => {
 
   if (!user) return null;
 
+  const completedCount = appointments.filter(a => a.status === 'Completed').length;
+  const pendingCount = appointments.filter(a => a.status === 'Pending' || a.status === 'Confirmed').length;
+
   return (
-    <div className="bg-gray-50 min-h-[calc(100vh-64px)] py-10">
+    <div className="min-h-[calc(100vh-64px)] py-10 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="mb-8 flex justify-between items-end">
+        {/* Welcome Header */}
+        <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 bg-white/60 backdrop-blur-md p-6 rounded-3xl border border-white/80 shadow-sm">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-            <p className="text-gray-600 mt-2">Welcome back, {user.name} ({user.role})</p>
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-pink-700 bg-pink-100/80 px-3 py-1 rounded-full mb-2">
+              <Sparkles size={14} /> Salon Dashboard
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight font-display">
+              Welcome back, <span className="text-pink-600">{user.name}</span>
+            </h1>
+            <p className="text-gray-500 text-sm mt-1">
+              Account Role: <span className="font-semibold text-gray-800 capitalize">{user.role}</span> &bull; Manage your salon appointments & treatments
+            </p>
           </div>
           {user.role === 'customer' && (
-            <button onClick={() => navigate('/services')} className="btn-primary">
-              New Booking
+            <button onClick={() => navigate('/services')} className="btn-primary flex items-center gap-2 text-sm px-6 py-3">
+              <Scissors size={18} /> Book New Service
             </button>
           )}
         </div>
 
+        {/* Quick Luxury Stat Highlights */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+          <div className="card bg-white/85 border border-white/80 p-6 flex items-center gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-pink-500 to-rose-400 text-white flex items-center justify-center shadow-md shadow-pink-200">
+              <Calendar size={26} />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Bookings</div>
+              <div className="text-3xl font-black text-gray-900 font-display">{appointments.length}</div>
+            </div>
+          </div>
+
+          <div className="card bg-white/85 border border-white/80 p-6 flex items-center gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 text-white flex items-center justify-center shadow-md shadow-emerald-200">
+              <CheckCircle2 size={26} />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-gray-400 uppercase tracking-wider">Completed Sessions</div>
+              <div className="text-3xl font-black text-gray-900 font-display">{completedCount}</div>
+            </div>
+          </div>
+
+          <div className="card bg-white/85 border border-white/80 p-6 flex items-center gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-400 to-orange-400 text-white flex items-center justify-center shadow-md shadow-amber-200">
+              <Crown size={26} />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-gray-400 uppercase tracking-wider">Luxe Privilege</div>
+              <div className="text-lg font-black text-gray-900 font-display capitalize">
+                {user.role === 'admin' ? 'Admin Access' : 'VIP Gold Member'}
+              </div>
+            </div>
+          </div>
+        </div>
+
         {user.role === 'admin' && <AdminPanel />}
 
-        <div className="card border-0 shadow-md">
-          <h2 className="text-xl font-bold text-gray-900 mb-6 border-b pb-4">
-            {user.role === 'customer' ? 'My Appointments' : 'All Appointments'}
-          </h2>
+        {/* Appointments Table Card */}
+        <div className="card bg-white/90 backdrop-blur-md border border-white/80 shadow-xl shadow-pink-100/40 rounded-3xl p-6 overflow-hidden">
+          <div className="flex justify-between items-center mb-6 border-b border-pink-100 pb-4">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 font-display">
+                {user.role === 'customer' ? 'My Salon Appointments' : 'All Salon Reservations'}
+              </h2>
+              <p className="text-xs text-gray-500 mt-0.5">Real-time status updates and treatment details</p>
+            </div>
+            {appointments.length > 0 && (
+              <span className="text-xs font-bold bg-pink-50 text-pink-700 px-3 py-1 rounded-full border border-pink-200">
+                {appointments.length} Records
+              </span>
+            )}
+          </div>
           
           {loading ? (
-             <div className="text-center py-10">Loading...</div>
+             <div className="text-center py-16">
+               <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-pink-600 mx-auto"></div>
+               <p className="text-xs text-gray-400 mt-3 font-semibold">Fetching appointments...</p>
+             </div>
           ) : appointments.length === 0 ? (
-             <div className="text-center py-10 text-gray-500">No appointments found.</div>
+             <div className="text-center py-16 px-4">
+               <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4 text-pink-500">
+                 <Calendar size={28} />
+               </div>
+               <h3 className="text-lg font-bold text-gray-800 mb-1">No Appointments Booked Yet</h3>
+               <p className="text-gray-500 text-sm max-w-sm mx-auto mb-6">
+                 Browse our 18 luxury services and schedule your first self-care session with our master beauticians.
+               </p>
+               {user.role === 'customer' && (
+                 <button onClick={() => navigate('/services')} className="btn-primary text-sm px-6 py-2.5">
+                   Explore Services & Book
+                 </button>
+               )}
+             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">

@@ -8,21 +8,22 @@ export default {
     extend: {
       colors: {
         primary: {
-          50: '#fdf4ff',
-          100: '#fae8ff',
-          200: '#f5d0fe',
-          300: '#f0abfc',
-          400: '#e879f9',
-          500: '#d946ef',
-          600: '#c026d3',
-          700: '#a21caf',
-          800: '#86198f',
-          900: '#701a75',
-          950: '#4a044e',
+          50: '#fff1f5',
+          100: '#ffe4ed',
+          200: '#fecddc',
+          300: '#fda4c1',
+          400: '#fb719f',
+          500: '#f43f7a',
+          600: '#e11d61',
+          700: '#be124d',
+          800: '#9d1243',
+          900: '#83143c',
+          950: '#4c051e',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+        display: ['Outfit', 'sans-serif'],
       }
     },
   },

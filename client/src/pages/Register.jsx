@@ -45,12 +45,15 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-md w-full">
-        <div className="card shadow-lg border-0">
+        <div className="card bg-white/90 backdrop-blur-xl border border-white/80 shadow-2xl shadow-pink-200/40 p-8 sm:p-10 rounded-3xl">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Create an account</h2>
-            <p className="text-gray-500 mt-2">Join LuxeSalon to book your appointments.</p>
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-600 to-rose-400 text-white flex items-center justify-center mx-auto mb-4 shadow-md shadow-pink-200">
+              <UserIcon size={22} />
+            </div>
+            <h2 className="text-3xl font-black text-gray-900 tracking-tight font-display">Create an account</h2>
+            <p className="text-gray-500 text-sm mt-1">Join LuxeSalon for personalized beauty care</p>
           </div>
 
           {error && (
