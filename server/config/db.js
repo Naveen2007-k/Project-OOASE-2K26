@@ -1,9 +1,12 @@
 import mongoose from 'mongoose';
+import { seedDefaultData } from '../seeder.js';
 
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI);
     console.log(`MongoDB Connected: ${conn.connection.host}`);
+    // Auto-seed initial salon services and staff if database is empty
+    await seedDefaultData();
   } catch (error) {
     console.error(`Error: ${error.message}`);
     process.exit(1);

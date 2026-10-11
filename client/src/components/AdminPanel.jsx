@@ -48,7 +48,19 @@ const AdminPanel = () => {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-              <input type="text" className="input-field" value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})} />
+              <select 
+                className="input-field" 
+                value={formData.category} 
+                onChange={e => setFormData({...formData, category: e.target.value})}
+              >
+                <option value="Hair">Hair</option>
+                <option value="Skincare">Skincare</option>
+                <option value="Makeup">Makeup</option>
+                <option value="Spa">Spa</option>
+                <option value="Nails">Nails</option>
+                <option value="Waxing">Waxing</option>
+                <option value="General">General</option>
+              </select>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Price ($)</label>
